@@ -300,7 +300,7 @@ The reverse web proxy server should fulfill the following tasks:
 ## AUTHOR AND COPYRIGHT
 
 * Author: Mathew Chan
-* Web: mathewsystems.com / matcphotos.com
+* Web: [mathewsystems.com](https://www.mathewsystems.com) / [matcphotos.com](https://www.matcphotos.com)
 * Contact: mathew (dot) chan (at) mathewsystems.com
 
 ## LICENSE, USAGE AND DISTRIBUTION
