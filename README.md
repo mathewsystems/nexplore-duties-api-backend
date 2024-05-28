@@ -236,6 +236,27 @@ API Server Ready: Nexplore Duties Assignment System Backend app listening on por
 }
 ```
 
+### Common Issues
+
+#### Invalid Runtime Configuration
+
+```
+# node server/index.js
+
+/opt/nexplore/server/serverConfig.js:48
+            throw "Postgres DB user not provided.";
+            ^
+Postgres DB user not provided.
+(Use `node --trace-uncaught ...` to show where the exception was thrown)
+
+Node.js v18.20.3
+```
+
+Potential Issues:
+
+1. No .env file found at runtime current working directory. Solution: Create .env file and configure as instructed above.
+2. Invalid runtime configurations. Most likely invalid database configuration.
+
 ## DEPLOYMENT AND PRODUCTION ENVIRONMENT
 
 ### On Linux, single node deployment
