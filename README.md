@@ -137,6 +137,18 @@ Note: The API server does not serialize NULL values.
 
 For detailed explanation of the specifications, see BUILDING.md file.
 
+## INSTALLATION
+
+### Quick Start
+
+Steps:
+
+1. Download a release package (nexplore-duties-api-backend.tar.xz), decompress it into a dedicated running directory.
+2. Provision a Postgres database instance and user.
+3. Initialize database structure (see below)
+4. Configure runtime configuration file.
+5. Start server (e.g. cd /opt/api-server ; node ./index.js)
+
 ## RUNTIME CONFIGURATION
 
 ### CONFIGURATION FILE
