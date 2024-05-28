@@ -6,6 +6,8 @@
 
 * Pagination of GetTasks
 * Task Search
+* OIDC / OAuth2 Authentication Token Exchanges
+* Request / Response Signatures and Validation
 
 ### Test boards
 

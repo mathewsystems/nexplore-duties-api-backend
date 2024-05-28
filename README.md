@@ -6,7 +6,7 @@
 * Typescript Version: 5.4.5+
 * Node.JS runtime environment: >= 18.20.0 (LTS Recommended)
 * Stateless API Server
-* Webservice Type: HTTP-based RESTful JSON, XML and SOAP not supported
+* Webservice Type: HTTP-based RESTful JSON. XML and SOAP not supported
 * HTTP Protocol Supported: HTTP/1.1 only, no SSL/TLS support.
 * Supported Databases: Postgres v16+ only (Should be backward compatible with v12-v15)
 * Supported OS: Any with supported Node.JS runtimes (Linux, Unix, Windows, MacOS, etc.)
