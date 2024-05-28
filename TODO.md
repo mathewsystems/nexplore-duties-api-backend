@@ -9,6 +9,10 @@
 * OIDC / OAuth2 Authentication Token Exchanges
 * Request / Response Signatures and Validation
 
+### Compatibility
+
+* Database Access Wrappers, to support more database vendors (MySQL, Apache Cassandra, Oracle, DB/2, Sybase, etc.)
+
 ### Test boards
 
 #### Integration Tests

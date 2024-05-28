@@ -58,6 +58,8 @@ X-API-SIGNATURE: <signature_hash>
 ```http
 200 OK
 Access-Control-Allow-Origin: <CORS_CONFIG>
+Access-Control-Allow-Methods: <CORS_CONFIG>
+Origin: <ORIGIN>
 Content-Type: application/json; charset=utf-8
 X-API-RESPONSE-UUID: 8adc58eb-9478-44c8-a7f0-c876622b5a49
 X-API-RESPONSE-TIMESTAMP: 2024-05-28T01:15:59.133Z
@@ -108,6 +110,8 @@ X-PAYLOAD-SIGNATURE: <signature_hash>
 ```http
 400 Bad Request
 Access-Control-Allow-Origin: <CORS_CONFIG>
+Access-Control-Allow-Methods: <CORS_CONFIG>
+Origin: <ORIGIN>
 Content-Type: application/json; charset=utf-8
 X-API-RESPONSE-UUID: 50df987a-6972-4590-b6ae-faf1b1d06cb3
 X-API-RESPONSE-TIMESTAMP: 2024-05-28T01:24:07.173Z
@@ -251,6 +255,12 @@ API Server Ready: Nexplore Duties Assignment System Backend app listening on por
 * Cloud native serverless deployment is also possible on AWS Lambda, on Lambda Node.JS Runtimes.
 
 ### PRODUCTION CONSIDERATIONS
+
+#### Database
+
+It is recommended that the Postgres database be grouped further into schemas, both for security isolation and better managability.
+
+#### HTTP Web Server
 
 The Node.JS "express" web server is not supposed to be directly accessed. It is HIGHLY RECOMMENDED to sit behind a web reverse proxy for security and performance considerations.
 

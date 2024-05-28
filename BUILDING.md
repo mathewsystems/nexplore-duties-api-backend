@@ -14,8 +14,14 @@ The server is written entirely in TYPE-STRICT Typescript. All objects, procedure
 
 ### PREREQUISITES
 
+#### Development Tools
+
+**Node.JS Runtimes: >= v18 LTS**
+
+Required Libraries: Typescript v5.4, ts-node Typescript to Javascript transpiler.
+
 ```
-npm install -g typescript
+npm install -g typescript ts-node
 ```
 
 ### BUILD
@@ -62,13 +68,21 @@ Test Codes Directory: <project_root>/tests
 * services: Service modules, designed as dependency injectable modules.
 * validations: Validator classes
 
-## RUN TESTS
+## RUN TESTS AFTER BUILD
 
 ### Test Prerequsites
 
 The Postgres database server must be online and accessible. The test scripts connect to the database server and executes data-correlated integration tests.
 
 For configuration of the database server, refer to README.md file.
+
+The project uses the Node JEST engine for testing.
+
+```
+npm install -g jest
+```
+
+Start Regression Tests
 
 ```
 npm test
@@ -115,6 +129,47 @@ Time:        0.547 s, estimated 1 s
 Ran all test suites.
 ```
 
+## Common Build and Test Issues
+
+
+### Node Typescript and build toolchain libraries not installed, or version incompatible
+
+```
+# npm run build
+
+> nexplore-duties-api-backend@1.0.0 build
+> npx tsc
+
+sh: 1: tsc: Permission denied
+```
+
+#### Solution
+
+Reinstall Toolchains in global library
+
+```
+npm install -g typescript ts-node
+```
+
+### Node JEST library not installed, or version incompatible
+
+```
+# npm test
+
+> nexplore-duties-api-backend@1.0.0 test
+> jest
+
+sh: 1: jest: Permission denied
+```
+
+#### Solution
+
+Reinstall JEST in global library
+
+```
+npm install -g jest
+```
+
 ## DEVELOPMENT GUIDE
 
 The API server is completely modularized to mimick a dependency injection (DI) capable framework. Services and URL routers are separated into service modules.
@@ -125,7 +180,7 @@ Attention: Therefore, DO NOT attempt to store states or files locally in the fil
 
 ### ENTRYPOINT
 
-The API server's entry point is index.ts .
+**The API server's entry point is index.ts .**
 
 The index.ts file does not do any extra work, except of calling the serverConfigSetup to read and initialize configuration files, and eventually, instantiate the ApiServer instance to start listening for new connections.
   
