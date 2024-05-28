@@ -4,7 +4,7 @@
 
 ### Functional
 
-* Pagination of GetTasks
+* Pagination of GetTasks (Now limited to 100 records only)
 * Task Search
 * OIDC / OAuth2 Authentication Token Exchanges
 * Request / Response Signatures and Validation

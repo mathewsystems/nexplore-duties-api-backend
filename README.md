@@ -297,6 +297,60 @@ The reverse web proxy server should fulfill the following tasks:
 * URL path rewriting and redirection
 * High-availability: Multi-node heartbeat monitoring of the backend API servers
 
+## PRELIMINARY BENCHMARK RESULTS
+
+### Benchmark Environment
+
+#### Hardware specifications running the Node.JS Runtime "Express" Webserver
+
+* Processor: Intel Xeon E5-2667 V2 3.3 Ghz - 4.0 Ghz (8 Cores 16 Threads)
+* Volatile Memory: 32 GB ECC-REG DDR3
+* Persistent Storage: SAMSUNG MZ1LW960HMJP-000MV (PM963 NVMe SSD) 960 GB  
+    (Read: 2,000 MB/s ; Write 1,200 MB/s ; Random IO: Read 430K IOPS ; Write 40K)
+* Network: All benchmark nodes connected through 10Gbps network, Intel line speed NICs.
+
+#### Software Environment
+
+* OS: Debian 12
+* Node.JS v18.20 Express Webserver (No reverse proxy, raw throughput benchmarking)
+* No virtualisation, bare-metal
+* Postgres batabase running on the same node and same operating system
+* mimalloc non-locking hot memory allocator
+
+#### Benchmark Tool
+
+* JMeter
+* Apache Bench (ab)
+
+#### Preliminary Benchmark Results (No Optimisation)
+
+| Number of Instances | Server Handled Requsts / sec | Error Rate (%) | CPU Load Average (%) (All CPUs) |
+| --- | --- | --- | --- |
+| 1 | 1627 | 0 | 8 |
+| 2 | 3171 | 0 | 16 |
+| 3 | 4576 | 0 | 24 |
+| 4 | 5733 | 0 | 32 |
+| 5 | 6318 | 0 | 36 |
+
+#### Summary
+
+Note that Node.JS (Express Webserver) is a single worker, single threaded web server. In other words, a single instance would not scale vertically on more powerful hardware with more processing cores / units (CPUs).  
+
+In order to scale within a single node, more instances of the Node.JS has to be called within the same environment.
+
+To optimise for further performance, relocate the database to another node within a fast, low-latency network. As we could see the bottleneck tops at ~ 6000 QPS, whereas the Postgres database starts to saturate the processing units with context switching and locks. Afterwards, further increase the number of instances running on the node.  
+
+A full linear scaling to upto > 20,000 QPS is apparently possible, using the benchmark hardware platform which is already almost 10 years old.
+  
+A rule of thumb to estimate the number of users the platform can serve:
+  
+Let's take a number of 30% of active users which are actively operating on the application, causing clicks and incoming webservice calls.  
+
+**For an SLA of < 40ms latency QoS:**  
+1,500 QPS ~ 4,500 users  
+6,000 QPS ~ 18,000 users  
+20,000 QPS ~ 60,000 users  
+
 ## AUTHOR AND COPYRIGHT
 
 * Author: Mathew Chan
