@@ -30,6 +30,7 @@ Authorization: Bearer <token>
 Content-Type: application/json; charset=utf-8
 X-API-OPERATION: /tasks/add/
 X-API-REQUEST-UUID: 7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440
+X-API-REQUEST-TIMESTAMP: 2024-05-26T03:08:54.431Z
 X-API-SIGNATURE: <signature_hash>
 ```
 
@@ -59,6 +60,7 @@ X-API-SIGNATURE: <signature_hash>
 Access-Control-Allow-Origin: <CORS_CONFIG>
 Content-Type: application/json; charset=utf-8
 X-API-RESPONSE-UUID: 8adc58eb-9478-44c8-a7f0-c876622b5a49
+X-API-RESPONSE-TIMESTAMP: 2024-05-28T01:15:59.133Z
 X-API-SIGNATURE: <signature_hash>
 ```
 
@@ -83,6 +85,7 @@ Authorization: Bearer <token>
 Content-Type: application/json; charset=utf-8
 X-API-OPERATION: /tasks/add/
 X-API-REQUEST-UUID: 7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440
+X-API-REQUEST-TIMESTAMP: 2024-05-26T03:08:54.431Z
 X-PAYLOAD-SIGNATURE: <signature_hash>
 ```
 
@@ -107,6 +110,7 @@ X-PAYLOAD-SIGNATURE: <signature_hash>
 Access-Control-Allow-Origin: <CORS_CONFIG>
 Content-Type: application/json; charset=utf-8
 X-API-RESPONSE-UUID: 50df987a-6972-4590-b6ae-faf1b1d06cb3
+X-API-RESPONSE-TIMESTAMP: 2024-05-28T01:24:07.173Z
 X-PAYLOAD-SIGNATURE: <signature_hash>
 ```
 

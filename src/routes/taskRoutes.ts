@@ -42,10 +42,11 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         .then(t => {
 
             const respUuid:UUID = randomUUID();
+            const responseTimestamp = new Date();
 
             // Instantiate response object
             const respJson: GetTasksResponse = {
-                responseTimestamp: new Date(),
+                responseTimestamp: responseTimestamp,
                 responseUuid: respUuid,
                 responseCode: 200,
                 totalRecords: t?.totalRecords,
@@ -55,6 +56,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             };
 
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .send(respJson);
 
         });
@@ -66,10 +68,11 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         const taskId = req.params.taskId.trim();
 
         const respUuid:UUID = randomUUID();
+        const responseTimestamp = new Date();
 
         // Instantiate response object
         const respJson: AddTaskResponse = {
-            responseTimestamp: new Date(),
+            responseTimestamp: responseTimestamp,
             responseUuid: respUuid
         };
 
@@ -80,6 +83,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             respJson.message = "Invalid Task ID";
 
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .status(400)
                 .send(respJson);
 
@@ -97,7 +101,9 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
                     respJson.responseCode = 200;
                     respJson.message = `Task ${taskId} deleted successfully.`
 
-                    res.send(respJson);
+                    res.header("X-API-RESPONSE-UUID", respUuid)
+                        .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
+                        .send(respJson);
                     
                 });
             
@@ -112,6 +118,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             respJson.message = "Server error. Contact administrator.";
 
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .status(500)
                 .send(respJson);
 
@@ -130,9 +137,10 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         const reqNewTask:AddTaskRequest = req.body;
 
         const respUuid:UUID = randomUUID();
+        const responseTimestamp = new Date();
 
         const respJson: AddTaskResponse = {
-            responseTimestamp: new Date(),
+            responseTimestamp: responseTimestamp,
             responseUuid: respUuid,
             correleateRequestUuid: reqNewTask.requestUuid,
         }
@@ -150,6 +158,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             respJson.errors = ex.reasons;
             
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .status(400)
                 .send(respJson);
 
@@ -165,6 +174,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             respJson.errors = ["No Task provided."];
 
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .status(400)
                 .send(respJson);
 
@@ -185,6 +195,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
                 respJson.errors = ex.reasons;
     
                 res.header("X-API-RESPONSE-UUID", respUuid)
+                    .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                     .status(400)
                     .send(respJson);
     
@@ -205,6 +216,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
                 respJson.taskId = taskId;
     
                 res.header("X-API-RESPONSE-UUID", respUuid)
+                    .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                     .send(respJson);
                     
                 return;
@@ -224,6 +236,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             respJson.message = "Server error. Contact administrator.";
 
             res.header("X-API-RESPONSE-UUID", respUuid)
+                .header("X-API-RESPONSE-TIMESTAMP", responseTimestamp.toISOString())
                 .status(500)
                 .send(respJson);
 

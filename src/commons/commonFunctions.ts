@@ -2,7 +2,7 @@ export function sanitizeStringFields(obj:any):any {
 
     for (let prop in obj) {
 
-        if (obj[prop] != null && typeof(prop) === 'string') {
+        if (prop != null && obj[prop] != null && typeof obj[prop] === 'string') {
             obj[prop] = obj[prop].trim();
         }
 
