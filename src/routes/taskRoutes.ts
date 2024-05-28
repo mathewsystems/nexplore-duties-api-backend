@@ -21,7 +21,7 @@
 
 import { Express, Request, Response, Router } from "express";
 import TaskService from "../services/taskService";
-import { randomUUID } from "crypto";
+import { UUID, randomUUID } from "crypto";
 import { GetTasksResponse } from "../models/wsTypes/getTasksResponse";
 import { AddTaskResponse } from "../models/wsTypes/addTaskResponse";
 import { AddTaskRequest } from "../models/wsTypes/addTaskRequest";
@@ -41,18 +41,21 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         taskService.getTasks()
         .then(t => {
 
+            const respUuid:UUID = randomUUID();
+
             // Instantiate response object
             const respJson: GetTasksResponse = {
-            responseTimestamp: new Date(),
-            responseUuid: randomUUID(),
-            responseCode: 200,
-            totalRecords: t?.totalRecords,
-            recordsPerPage: 100,
-            pageNum: 34,
-            tasks: t?.tasks
+                responseTimestamp: new Date(),
+                responseUuid: respUuid,
+                responseCode: 200,
+                totalRecords: t?.totalRecords,
+                recordsPerPage: 100,
+                pageNum: 34,
+                tasks: t?.tasks
             };
 
-            res.send(respJson);
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .send(respJson);
 
         });
     });
@@ -62,40 +65,57 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         
         const taskId = req.params.taskId.trim();
 
+        const respUuid:UUID = randomUUID();
+
+        // Instantiate response object
+        const respJson: AddTaskResponse = {
+            responseTimestamp: new Date(),
+            responseUuid: respUuid
+        };
+
         if (taskId.length === 0) {
-            res.status(400).send({
-                errorCode: 400,
-                message: "Invalid Task ID"
-            });
+
+            respJson.responseCode = 400;
+            respJson.errors = ["Invalid Task ID"];
+            respJson.message = "Invalid Task ID";
+
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .status(400)
+                .send(respJson);
+
             return;
+
         }
 
         console.debug(`[${new Date().toISOString()}][WS Request][DeleteTask]: ${taskId}`);
 
         try {
 
-        taskService.deleteTask(taskId);
+            taskService.deleteTask(taskId)
+                .then(() => {
 
-        // Instantiate response object
-        const respJson: AddTaskResponse = {
-            responseTimestamp: new Date(),
-            responseUuid: randomUUID(),
-            responseCode: 200,
-            message: `Task ${taskId} deleted successfully.`
-        };
+                    respJson.responseCode = 200;
+                    respJson.message = `Task ${taskId} deleted successfully.`
 
-        res.send(respJson);
+                    res.send(respJson);
+                    
+                });
             
         } catch (error) {
 
-        console.error(`[${new Date().toISOString()}][apiServer] Service error on deleting task: ${taskId}`);
-        
-        console.error(error);
+            console.error(`[${new Date().toISOString()}][apiServer] Service error on deleting task: ${taskId}`);
+            
+            console.error(error);
 
-        res.status(500).send({
-            errorCode: 500,
-            message: "Server error. Contact administrator."
-        });
+            respJson.responseCode = 500;
+            respJson.errors = ["Server error. Contact administrator."];
+            respJson.message = "Server error. Contact administrator.";
+
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .status(500)
+                .send(respJson);
+
+            return;
         
         }
 
@@ -109,6 +129,14 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
 
         const reqNewTask:AddTaskRequest = req.body;
 
+        const respUuid:UUID = randomUUID();
+
+        const respJson: AddTaskResponse = {
+            responseTimestamp: new Date(),
+            responseUuid: respUuid,
+            correleateRequestUuid: reqNewTask.requestUuid,
+        }
+
         try {
 
             validateRequest(reqNewTask);
@@ -117,16 +145,13 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
 
             const ex = error as ValidationException;
 
-            const respErr: AddTaskResponse = {
-                responseTimestamp: new Date(),
-                responseUuid: randomUUID(),
-                correleateRequestUuid: reqNewTask.requestUuid,
-                errorCode: 400,
-                message: "Invalid Request",
-                errors: ex.reasons
-            }
-
-            res.status(400).send(respErr);
+            respJson.responseCode = 400;
+            respJson.message = "Invalid Request";
+            respJson.errors = ex.reasons;
+            
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .status(400)
+                .send(respJson);
 
             return;
             
@@ -135,10 +160,13 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         // Request validation
         if (reqNewTask.newTask == null) {
 
-            res.status(400).send({
-                errorCode: 400,
-                message: "No Task provided."
-            });
+            respJson.responseCode = 400;
+            respJson.message = "No Task provided.";
+            respJson.errors = ["No Task provided."];
+
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .status(400)
+                .send(respJson);
 
             return;
         
@@ -152,16 +180,13 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
     
                 const ex = error as ValidationException;
 
-                const respErr: AddTaskResponse = {
-                    responseTimestamp: new Date(),
-                    responseUuid: randomUUID(),
-                    correleateRequestUuid: reqNewTask.requestUuid,
-                    errorCode: 400,
-                    message: "Invalid Request",
-                    errors: ex.reasons
-                }
+                respJson.responseCode = 400;
+                respJson.message = "Invalid Request";
+                respJson.errors = ex.reasons;
     
-                res.status(400).send(respErr);
+                res.header("X-API-RESPONSE-UUID", respUuid)
+                    .status(400)
+                    .send(respJson);
     
                 return;
                 
@@ -174,34 +199,35 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
             taskService.addTask(req.body.newTask)
             .then(taskId => {
 
-                // Instantiate response object
-                const respJson: AddTaskResponse = {
-                    responseTimestamp: new Date(),
-                    responseUuid: randomUUID(),
-                    correleateRequestUuid: req.body.requestUuid,
-                    responseCode: 200
-                };
+                respJson.responseCode = 200;
+                respJson.message = "Invalid Request";
 
                 respJson.taskId = taskId;
-
-                res.send(respJson);
+    
+                res.header("X-API-RESPONSE-UUID", respUuid)
+                    .send(respJson);
+                    
+                return;
 
             });
         
         } catch (error) {
 
-        console.error(`[${new Date().toISOString()}][apiServer] Service error on adding new task: `);
+            console.error(`[${new Date().toISOString()}][apiServer] Service error on adding new task: `);
 
-        console.error(req);
-        
-        console.error(error);
+            console.error(req);
+            
+            console.error(error);
 
-        res.status(500).send({
-            errorCode: 500,
-            message: "Server error. Contact administrator."
-        });
+            respJson.responseCode = 500;
+            respJson.errors = ["Server error. Contact administrator."];
+            respJson.message = "Server error. Contact administrator.";
 
-        return;
+            res.header("X-API-RESPONSE-UUID", respUuid)
+                .status(500)
+                .send(respJson);
+
+            return;
 
         }
 

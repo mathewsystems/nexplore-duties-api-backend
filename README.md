@@ -29,6 +29,7 @@ Host: <hostname>
 Authorization: Bearer <token>
 Content-Type: application/json; charset=utf-8
 X-API-OPERATION: /tasks/add/
+X-API-REQUEST-UUID: 7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440
 X-API-SIGNATURE: <signature_hash>
 ```
 
@@ -57,6 +58,7 @@ X-API-SIGNATURE: <signature_hash>
 200 OK
 Access-Control-Allow-Origin: <CORS_CONFIG>
 Content-Type: application/json; charset=utf-8
+X-API-RESPONSE-UUID: 8adc58eb-9478-44c8-a7f0-c876622b5a49
 X-API-SIGNATURE: <signature_hash>
 ```
 
@@ -80,6 +82,7 @@ Host: <hostname>
 Authorization: Bearer <token>
 Content-Type: application/json; charset=utf-8
 X-API-OPERATION: /tasks/add/
+X-API-REQUEST-UUID: 7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440
 X-PAYLOAD-SIGNATURE: <signature_hash>
 ```
 
@@ -103,6 +106,7 @@ X-PAYLOAD-SIGNATURE: <signature_hash>
 400 Bad Request
 Access-Control-Allow-Origin: <CORS_CONFIG>
 Content-Type: application/json; charset=utf-8
+X-API-RESPONSE-UUID: 50df987a-6972-4590-b6ae-faf1b1d06cb3
 X-PAYLOAD-SIGNATURE: <signature_hash>
 ```
 

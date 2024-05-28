@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "build": "npx tsc",
-    "postbuild": "cp package*.json dist && cd dist && npm ci --production",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "test": "jest"
