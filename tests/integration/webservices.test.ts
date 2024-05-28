@@ -35,7 +35,7 @@ var PORT:Number = 8080;
 
 // Unit Test Objects
 const UNIT_TEST_BACKEND_ADD_TASK_OBJ_1: Task = {
-    id: '',     // Will be ignored by server (exists to match interface definiation)
+    id: '',     // Will be ignored by server (exists to match interface definition)
     name: "[TEST SUITE] ROMEO AND JULIET",
     abstract: "Me they shall feel while I am able to stand; and'tis known I am a pretty piece of flesh.",
     description: 
@@ -48,7 +48,7 @@ const UNIT_TEST_BACKEND_ADD_TASK_OBJ_1: Task = {
 
 // Correlation Test Objects
 const UNIT_TEST_BACKEND_ADD_TASK_OBJ_CORRELATION_1: Task = {
-    id: '',     // Will be ignored by server (exists to match interface definiation)
+    id: '',     // Will be ignored by server (exists to match interface definition)
     name: "[TEST SUITE] WILLIAM SHAKESPEARE",
     abstract: "AS YOU LIKE IT, ACT 2 SCENE 7",
     description: 

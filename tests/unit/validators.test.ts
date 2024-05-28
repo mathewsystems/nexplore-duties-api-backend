@@ -31,7 +31,7 @@ const UNIT_TEST_BACKEND_WS_ADD_TASK_VALID_REQ_1: AddTaskRequest = {
     requestTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     requestUuid: randomUUID(),
     newTask: {
-        id: '',     // Will be ignored by server (exists to match interface definiation)
+        id: '',     // Will be ignored by server (exists to match interface definition)
         name: "UNIT_TEST_BACKEND_ADD_TASK_OBJ_1 ",
         abstract: "UNIT_TEST_BACKEND_ADD_TASK_OBJ_1 ABSTRACT",
         description: 
@@ -46,7 +46,7 @@ const UNIT_TEST_BACKEND_WS_ADD_TASK_VALID_REQ_2: AddTaskRequest = {
     requestTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     requestUuid: randomUUID(),
     newTask: {
-        id: '',     // Will be ignored by server (exists to match interface definiation)
+        id: '',     // Will be ignored by server (exists to match interface definition)
         name: "    ",
         priority: 2,
         abstract: "",
@@ -62,7 +62,7 @@ const UNIT_TEST_BACKEND_WS_ADD_TASK_INVALID_REQ_1: AddTaskRequest = {
     requestTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     requestUuid: randomUUID(),
     newTask: {
-        id: '',     // Will be ignored by server (exists to match interface definiation)
+        id: '',     // Will be ignored by server (exists to match interface definition)
         name: "    ",
         abstract: "",
         description: 
@@ -77,7 +77,7 @@ const UNIT_TEST_BACKEND_WS_ADD_TASK_INVALID_REQ_2: AddTaskRequest = {
     requestTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     requestUuid: randomUUID(),
     newTask: {
-        id: '',     // Will be ignored by server (exists to match interface definiation)
+        id: '',     // Will be ignored by server (exists to match interface definition)
         name: "    ",
         priority: 5,
         abstract: "",
