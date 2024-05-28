@@ -20,7 +20,7 @@ npm install -g typescript
 
 ### BUILD
 
-At the source directory (<project_root>/src), run
+At the source directory containing the package.json file (<project_root>), run
 
 ```
 npm run build
@@ -68,7 +68,7 @@ Test Codes Directory: <project_root>/tests
 
 The Postgres database server must be online and accessible. The test scripts connect to the database server and executes data-correlated integration tests.
 
-For confiuration of the database server, refer to README.md file.
+For configuration of the database server, refer to README.md file.
 
 ```
 npm test
