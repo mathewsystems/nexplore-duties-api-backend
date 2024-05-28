@@ -117,7 +117,7 @@ Ran all test suites.
 
 ## DEVELOPMENT GUIDE
 
-The API server is completed modularized to mimick a dependency injection (DI) capable framework. Services and URL routers are separated into service modules.
+The API server is completely modularized to mimick a dependency injection (DI) capable framework. Services and URL routers are separated into service modules.
 
 The API server is designed to be stateless.
 
