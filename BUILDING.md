@@ -32,6 +32,8 @@ or
 npx tsc
 ```
 
+For final runtime distribution, copy the node_modules directory to working directory, i.e. dist/src/ .
+
 Output Directory: <project_root>/dist
 
 #### Directory Layouts
@@ -159,6 +161,10 @@ Example:
       this.app.use("/new_route", newRouter);
 }
 ```
+
+### On Database Record IDs
+
+The API server uses Oracle/Postgres sequences to generate unique IDs for database records, which makes it easy to concatenate with other parts to form a globally unique identifier in the future.
 
 ## TEST BOARDS
 
