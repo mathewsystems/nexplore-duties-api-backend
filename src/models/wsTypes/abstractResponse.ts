@@ -23,7 +23,7 @@ import { UUID } from "crypto"
 
 export abstract class AbstractResponse {
     responseUuid!: UUID;
-    correleateRequestUuid?: UUID;
+    correlateRequestUuid?: UUID;
     responseTimestamp!: Date;
     responseCode?: number;
     message?: string;

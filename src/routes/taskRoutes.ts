@@ -142,7 +142,7 @@ export function addTaskRoutes(app:Express, taskService:TaskService):Router {
         const respJson: AddTaskResponse = {
             responseTimestamp: responseTimestamp,
             responseUuid: respUuid,
-            correleateRequestUuid: reqNewTask.requestUuid,
+            correlateRequestUuid: reqNewTask.requestUuid,
         }
 
         try {

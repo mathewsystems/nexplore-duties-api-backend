@@ -92,14 +92,14 @@ const UNIT_TEST_BACKEND_WS_ADD_TASK_INVALID_REQ_2: AddTaskRequest = {
 const UNIT_TEST_BACKEND_WS_ADD_TASK_VALID_RESP_1: AddTaskResponse = {
     responseTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     responseUuid: "73adb318-f2c3-4729-8aec-88feca3ca743",
-    correleateRequestUuid: "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
+    correlateRequestUuid: "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
     taskId: "100110"
 }
 
 const UNIT_TEST_BACKEND_WS_ADD_TASK_INVALID_RESP_1: AddTaskResponse = {
     responseTimestamp: new Date("2024-05-27T16:35:08.567Z"),
     responseUuid: "73adb318-f2c3-4729-8aec-88feca3ca743",
-    correleateRequestUuid: "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440"
+    correlateRequestUuid: "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440"
 }
 /* EOF - Test Boards */
 
