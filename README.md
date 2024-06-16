@@ -71,7 +71,7 @@ X-API-SIGNATURE: <signature_hash>
 {
     "responseTimestamp": "2024-05-28T01:15:59.133Z",
     "responseUuid": "8adc58eb-9478-44c8-a7f0-c876622b5a49",
-    "correleateRequestUuid": "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
+    "correlateRequestUuid": "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
     "responseCode": 200,
     "taskId": "100213"
 }
@@ -123,7 +123,7 @@ X-PAYLOAD-SIGNATURE: <signature_hash>
 {
     "responseTimestamp": "2024-05-28T01:24:07.173Z",
     "responseUuid": "50df987a-6972-4590-b6ae-faf1b1d06cb3",
-    "correleateRequestUuid": "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
+    "correlateRequestUuid": "7f4ac8ba-17f5-47eb-8228-2ae0ab8f9440",
     "errorCode": 400,
     "message": "Invalid Request",
     "errors": [
